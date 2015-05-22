@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!--
+By Daniela Simancas Mateus
+-->
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="img/favicon.ico">
+
+    <title>Wiki SmartCylinder</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item" href="index.html">Inicio</a>
+          <a class="blog-nav-item" href="capitulo1.html">Intro</a>
+          <a class="blog-nav-item" href="capitulo2.html">Presentación producto</a>
+          <a class="blog-nav-item active" href="capitulo3.html">Instal. hardware</a>
+          <a class="blog-nav-item" href="capitulo4.html">Config. técnicas de control</a>
+          <a class="blog-nav-item" href="capitulo5.html">Interfaz y com.</a>
+          <a class="blog-nav-item" href="capitulo6.html">Recomendaciones</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="blog-header">
+        <h1 class="blog-title">Instalación del hardware</h1>
+        <p class="lead blog-description"></p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">Construcción de tuberías</h2>
+            <hr>
+            <p>Los materiales especificados en la Sección 1.2 fueron seleccionados para un montaje de la forma mostrada en la Figura 1. De manera similar, en este segmento se hace un recuento del proceso de construcción teniendo en mente aquel montaje. Sin embargo, el usuario puede necesitar de un montaje diferente, y bien puede hacerlo siguiendo un proceso análogo al aquí descrito. Por supuesto, teniendo precaución de realizar asimismo las modificaciones pertinentes en los demás aspectos del proyecto.</p>
+            <ol>
+                <li>Realizar un dibujo esquemático de la topología deseada en la red de tuberías. Se hace especial énfasis en la ubicación de Tee, codos y válvulas. Es importante notar que cada robot limpiador va ubicado dentro de una Tee.</li>
+                <li>A partir del dibujo realizado en el literal anterior, definir las longitudes de cada tramo de tubería, verificando que éstas sean consistentes. NOTA: se recomienda evitar tramos menores a 10cm de longitud, ya que son difíciles de cortar.</li>
+                <li>Cortar los tubos rectos de 3” en segmentos de las longitudes definidas en el paso anterior. Esto puede realizarse con máquinas especiales o con segueta. En caso de que se haga con segueta, será necesario remover la rebaba de los bordes de cada segmento.</li>
+                <li>(Opcional) Se recomienda ubicar cada segmento de tubo en la posición correspondiente antes de seguir. Esto con el fin de comprobar que todas las partes hayan quedado con el tamaño adecuado y el sistema pueda cerrarse.</li>
+                <li>Identificar los puntos de la tubería donde han de colocarse sensores. NOTA: se recomienda que estos puntos estén repartidos de forma que abarquen toda la tubería y estén espaciados uniformemente entre sí</li>
+                <li>Instalar los sensores en los puntos escogidos previamente. Tome un tramo recto de tubo y abra dos agujeros diametralmente opuestos del tamaño de la cabeza del led y de la fotorresistencia. Utilice un taladro pequeño o mototool para mejores resultados. De un lado coloque el led y del otro la fotorresistencia, y fíjelos en esa posición con silicona. Los pines de ambos componentes deben ser accesible desde el exterior del tubo. NOTA: la instalación de estos sensores se hace de esta manera para permitir cambiar los componentes en caso de que alguno se dañe.</li>
+                <li>Verificar que los leds enciendan y las fotorresistencias efectivamente varían su valor de resistencia bajo distintos estímulos de luz utilizando un multímetro.</li>
+                <li>Pegar cada sección de tubo con el pegante para PVC. Es muy importante que siga las recomendaciones del fabricante del pegante, tales como limpiar los tubos previamente. NOTA: tubos mal pegados no podrán corregirse después; ya que la única forma de separarlos es rompiéndolos.</li>
+                <li>Reforzar las uniones con la cinta teflón para reducir la posibilidad de que haya fugas.</li>
+                <li>Agregar la entrada de agua con la tubería de 1”, el reductor de 2” a 1” y la manguera.</li>
+                <li>11.	Verificar que no haya fugas en la planta al hacer correr agua a través de ella. En caso de que se encuentre alguna fuga, sellarla con silicona o cinta.</li>
+            </ol>
+          </div><!-- /.blog-post -->
+          
+          <div class="blog-post">
+            <h2 class="blog-post-title">Construcción de robots</h2>
+            <hr>
+            <p></p>
+            <h3>Diseño</h3>
+            <p>Los materiales especificados en la Sección 1.2 fueron seleccionados para un montaje de la forma mostrada en la Figura 2, donde una jeringa contiene el líquido limpiador y es controlada por la activación de un motor que mueve el émbolo de la jeringa.>
+            <br/>
+            Para realizar este montaje se debe seguir el siguiente proceso de construcción: 
+            </p>
+            <ol>
+                <li>Tomar el canal plástico en forma de U y cortarlo en tres segmentos iguales, uno para cada robot.</li>
+                <li>Abrir un pequeño orificio en el émbolo de la jeringa para lograr acoplar la cremallera mediante un tornillo.</li>
+                <li>Definir la posición en donde ira la jeringa de tal manera que la cremallera, previamente acoplada, quede pegada junto a la pared</li>
+            </ol>
+            <h3>Circuitos impresos</h3>
+          </div><!-- /.blog-post -->
+
+          <nav>
+            <ul class="pager">
+              <li><a href="capitulo1.html">Anterior</a></li>
+              <li><a href="capitulo3.html">Siguiente</a></li>
+            </ul>
+          </nav>
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>Acerca de la Wiki</h4>
+            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+          </div>
+          <div class="sidebar-module">
+            <h4>Archivos</h4>
+            <ol class="list-unstyled">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="capitulo1.html">Intro</a></li>
+                <li><a href="capitulo2.html">Presentación producto</a></li>
+                <li><a href="capitulo3.html">Instal. hardware</a></li>
+                <li><a href="capitulo4.html">Config. técnicas de control</a></li>
+                <li><a href="capitulo5.html">Interfaz y com.</a></li>
+                <li><a href="capitulo6.html">Recomendaciones</a></li>
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>Participantes</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">Carlos Andrés Padilla</a></li>
+              <li><a href="#">Roberto Mario Buelvas</a></li>
+              <li><a href="#">Sebastián Báez Barbosa</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <footer class="blog-footer">
+      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>
+        <a href="#">Subir</a>
+      </p>
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>

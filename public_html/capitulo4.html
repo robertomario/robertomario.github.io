@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<!--
+By Daniela Simancas Mateus
+-->
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="img/favicon.ico">
+
+    <title>Wiki SmartCylinder</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item" href="index.html">Inicio</a>
+          <a class="blog-nav-item" href="capitulo1.html">Intro</a>
+          <a class="blog-nav-item" href="capitulo2.html">Presentación producto</a>
+          <a class="blog-nav-item" href="capitulo3.html">Instal. hardware</a>
+          <a class="blog-nav-item active" href="capitulo4.html">Config. técnicas de control</a>
+          <a class="blog-nav-item" href="capitulo5.html">Interfaz y com.</a>
+          <a class="blog-nav-item" href="capitulo6.html">Recomendaciones</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="blog-header">
+        <h1 class="blog-title">Configuración de técnicas de control</h1>
+        <p class="lead blog-description"></p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">Técnica 1: PID</h2>
+            <hr>
+            <dl>
+                <dt>Diseño y especificaciones</dt>
+                <dd>
+                    <p>Como primera estrategia de control se diseñó un PID paralelo con filtros derivativo y anti-windup para controlar la descarga de limpiador por parte de los robots. La sintonización se llevó a cabo con el método de Tyreus-Luyben. Se consideró que la acción de control estaría en el rango entre 0V y 8V. Para ello se hizo un modelo dinámico del motor conectado al sistema piñón-cremallera y éste a la jeringa. Las especificaciones deseadas en el PID eran que no hubiera overshoot, que la acción de control fuera siempre mayor o igual a 0 y que el tiempo de estabilización fuera cercano a 0.5s.</p>
+                    <p>Si no se tiene experiencia con sistemas de control, es preferible no modificar ninguno de estos parámetros. Sin embargo, en caso de que se requiera cambiar alguna característica del robot, como podría ser el motor por ejemplo, será necesario volver a sintonizar el PID. Para esto siga los siguientes pasos:</p>
+                    <ol>
+                        <li>
+                            <ul>
+                                <li>Resistencia de la armadura del motor</li>
+                                <li>Inductancia del motor</li>
+                                <li>Mediciones de velocidad angular y corriente del motor en función del voltaje aplicado en sus terminales en un rango de 1V a 8V</li>
+                                <li>Corriente de arranque del motor</li>
+                                <li>Área de la sección transversal de la jeringa</li>
+                                <li>Radio del engrane</li>
+                                <li>Masa mínima que permite mover la carga</li>
+                                <li>Volumen máximo de la jeringa</li>
+                                <li>Momento de inercia del motor</li>
+                                <li>Coeficiente de fricción viscosa del motor</li>
+                                <li>Constante del motor</li>
+                                <li>Torque de la carga</li>                                    
+                            </ul>
+                        </li>
+                        <li>Hacer un modelo dinámico del sistema, incluyendo la saturación en la acción de control. Preferiblemente en Simulink. Como ejemplo se muestra la Figura 2.</li>
+                        <li>Identificar frecuencias y ganancias últimas.</li>
+                        <li>Utilizar las ecuaciones del método Tyreus-Luyben para escoger los valores Kp, Ki y Kd del PID. Con el método de back-calculation para el filtro anti-windup se halla Kb con la ecuación K_b=√(K_i/K_d )  (Visioli, 2006). El valor N de la constante del filtro derivativo se puede hallar al probar diversos valores.<li>
+                    </ol>
+                    <br>
+                    <img src="img/modelo pid.png" alt="Figura 2. Modelo en Simulink del PID y su planta" class="img-rounded">
+                    <p>Figura 2. Modelo en Simulink del PID y su planta</p>
+                    <br>
+                </dd>
+                <dt>Código Arduino<dt>
+                <dd>
+                    <p>El PID diseñado se encuentra implementado en código en el archivo actuador.ino. El código está escrito en lenguaje Arduino, el cual es una forma simplificada de C, y se corre en el software Arduino IDE. Fue pensando para montarse en una tarjeta Arduino Mini. Si se cambia de tarjeta, recuerde verificar el número de los pines, como muestra la Figura 3. Por ejemplo, pinControl debe ser un pin con capacidad PWM.</p>
+                    <br>
+                    <img src="img/figura3.png" alt="Figura 3. Sección del código donde se especifican los pines" class="img-rounded">
+                    <p>Figura 3. Sección del código donde se especifican los pines</p>
+                    <br>
+                    
+                    <p>Por otro lado, los parámetros del PID están definidos como variables globales. Por tanto, para editarlos basta con modificar el segmento presentado en la Figura 4. Para información acerca de qué valores son adecuados, dirigirse a la sección 4.1.1. De nuevo, se recomienda que sólo realicen cambios personas con experiencia en el tema.</p>
+                    <br>
+                    <img src="img/figura4.png" alt="Figura 4. Sección del código donde se especifican los valores del PID" class="img-rounded">
+                    <p>Figura 4. Sección del código donde se especifican los valores del PID</p>
+                    <br>
+                </dd>
+            </dl>
+          </div>
+          <div class="blog-post">
+            <h2 class="blog-post-title">Técnica 2: Fuzzy Logic con Fault Detection</h2>
+            <hr>
+            <dl>
+                <dt>Diseño y especificaciones</dt>
+                <dd>
+                    <p>
+                        La segunda estrategia de control se basa en un detector de fallas usando lógica difusa. El Fuzzy Logic con Fault Detection tiene como objetivo detectar perturbaciones en el agua al interior de las tuberías. Dependiendo del nivel de falla que se logre observar, se mandan señales que indican a los robots cuando liquído limpiador deben inyectar.
+                        </br>
+                        Para la parte de detección de fallas se deben seguir los siguientes pasos:
+                    </p>
+                    <ol>
+                        <li>Determinar el valor límite de limpieza en el agua. Para esto, se mide los valores que arroja la fotorresistencia con el agua limpia y se toma el valor máximo.</li>
+                        <li>Para 10 entradas de datos se resta el valor límite. Posteriormente se promedia los valores resultantes de las 10 restas. El promedio obtenido indica el error actual que se tiene en el sensor.</li>
+                        <li>El error actual se hace ingresar en una sumatoria. De esta manera se obtiene el error acumulado.</li>
+                        <li>El error acumulado se satura a 0 en caso de ser negativo.</li>
+                        <li>Determinar el valor Threshold del sistema, este dato se usa para evitar que sobre picos en el sistema afecten la determinación del nivel de falla. Para esto, se ensucia el agua hasta obtener el valor máximo de suciedad en la fotorresistencia. Como Treshold se toma el máximo valor medido multiplicado por 1,1. </li>
+                        <li>Al valor Treshold se le resta el error acumulado. El dato obtenido de la resta indica la diferencia del error acumulado.</li>
+                    </ol>
+                    <p>A continuación debe realizarse la técnica Fuzzy Logic, los parámetros que se deben tener en cuenta son:</p>
+                    <ul>
+                        <li>Entradas: Error y diferencia del error acumulado.</li>
+                        <li>Salida: Nivel de falla.</li>
+                        <li>Reglas: Mamdani (IF X1 is A1 AND X2 is A2 … THEN Y is B).</li>
+                        <li>Método de Inferencia: Clipping.</li>
+                        <li>Método de Defuzificación: Centro del área</li>
+                    </ul>
+                    <p>Para el diseño del Fuzzy Logic se hace uso del ToolBox de Matlab “fuzzy”. Los pasos que deben seguirse para la obtención de la estrategia Fuzzy, se muestran a continuación:</p>
+                    <ol>
+                        <li>Obtención de las funciones de membresía para las entradas.
+                            <ol>
+                                <li>Se fuzzyfica los datos de entrada, tanto para el error como para la diferencia del error acumulado.</li>
+                                <li>Se utilizan funciones de membresía trapezoidales para los estados difusos de los extremos y funciones de membresía triangulares para los estados difusos interiores. El cálculo de los parámetros de las funciones de membresía se hacen de tal manera que las funciones de membresía sean simétricas.</li>
+                            </ol>
+                        </li>
+                        <br>
+                        <img src="img/figura5.png" alt="Figura 5. Ejemplo funciones de membresía para el error." class="img-rounded">
+                        <p>Figura 5. Ejemplo funciones de membresía para el error.</p>
+                        <br>
+                        <img src="img/figura6.png" alt="Figura 6. Ejemplo funciones de membresía para la diferencia del error acumulado." class="img-rounded">
+                        <p>Figura 6. Ejemplo funciones de membresía para la diferencia del error acumulado.</p>
+                        <br>
+                        <li>Obtención de las funciones de membresía para la salida. 
+                            <ol>
+                                <li>Se establece un intervalo de 0 a 1 para la salida y se fuzzyfica en estados difusos según los niveles de falla.</li>
+                                <li>Se utilizan funciones de membresía triangulares para los estados difusos. El cálculo de los parámetros de las funciones de membresía se hacen de tal manera que las funciones de membresía sean simétricas.</li>
+                            </ol>
+                        </li>
+                        <br>
+                        <img src="img/figura7.png" alt="Figura 7. Ejemplo funciones de membresía para el nivel de falla." class="img-rounded">
+                        <p>Figura 7. Ejemplo funciones de membresía para el nivel de falla.</p>
+                        <br>
+                        <li>Determinación de las reglas para el mapeo entre entradas y salidas. Con las entradas que se tienen para este sistema Fuzzy y los estados difusos mostrados en las figuras 3,4 y 5. Se recomienda hacer uso de la siguiente distribución:</li>
+                        <br>
+                        <img src="img/figura8.png" alt="Figura 8. Defuzzyficación para obtener el valor de referencia según el nivel de falla." class="img-rounded">
+                        <p>Figura 8. Defuzzyficación para obtener el valor de referencia según el nivel de falla.</p>
+                        <br>
+                        <li>Defuzzyficación para obtener el valor de referencia según el nivel de falla.</li>
+                    </ol>
+                    <p>Los pasos anteriores deben realizarse para cada uno de los sensores instalados en la tubería.</p>
+                    <p>Por último, se debe determinar los valores de referencia que se le indican a cada robot. Esto depende de la salida defuzzificada de cada uno de los sensores. Para obtener el valor de referencia de cada actuador se determina el alcance que tiene cada uno de los Robots en los diferentes sensores al interior de la tubería.
+                        </br>El valor de referencia que se le indica a los robots se calcula de la siguiente manera:
+                    </p>
+                    <img src="img/ecuacion.png" alt=""img-rounded">
+                    <ul>
+                        <li>〖ref〗_k, valor de referencia para el robot k.</li>
+                        <li>Cm, cantidad máxima de liquido limpiador que se puede inyectar.</li>
+                        <li>∑j, sumatoria de las salidas de los sensores a los que se tiene alcance desde el robot k.</li>
+                        <li>n, número de sensores a los que se tiene alcance desde el robot k.</li>
+                    </ul>
+                </dd>
+                <dt>Código Arduino o Intel Galileo</dt>
+                <dd>
+                    <p>El Fuzzy Logic con Fault Detection diseñado se encuentra implementado en código en el archivo PruebaSensores.ino. El código está escrito en lenguaje Arduino, el cual es una forma simplificada de C, y se corre en el software Arduino IDE. Fue pensando para montarse en una tarjeta Intel Galileo. Se debe tener en cuenta que para poder utilizar esta tarjeta con el software de Arduino debe dhñasdñsa. Si se cambia de tarjeta, recuerde verificar el número de los pines, de tal manera que se correspondiente con su salida.</p>
+                </dd>
+            </dl>
+          </div><!-- /.blog-post -->
+          
+          
+          <nav>
+            <ul class="pager">
+              <li><a href="capitulo3.html">Anterior</a></li>
+              <li><a href="capitulo5.html">Siguiente</a></li>
+            </ul>
+          </nav>
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>Acerca de la Wiki</h4>
+            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+          </div>
+          <div class="sidebar-module">
+            <h4>Archivos</h4>
+            <ol class="list-unstyled">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="capitulo1.html">Intro</a></li>
+                <li><a href="capitulo2.html">Presentación producto</a></li>
+                <li><a href="capitulo3.html">Instal. hardware</a></li>
+                <li><a href="capitulo4.html">Config. técnicas de control</a></li>
+                <li><a href="capitulo5.html">Interfaz y com.</a></li>
+                <li><a href="capitulo6.html">Recomendaciones</a></li>
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>Participantes</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">Carlos Andrés Padilla</a></li>
+              <li><a href="#">Roberto Mario Buelvas</a></li>
+              <li><a href="#">Sebastián Báez Barbosa</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <footer class="blog-footer">
+      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>
+        <a href="#">Subir</a>
+      </p>
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
+
