@@ -85,11 +85,11 @@ By Daniela Simancas Mateus
                         </li>
                         <li>Hacer un modelo dinámico del sistema, incluyendo la saturación en la acción de control. Preferiblemente en Simulink. Como ejemplo se muestra la Figura 2.</li>
                         <li>Identificar frecuencias y ganancias últimas.</li>
-                        <li>Utilizar las ecuaciones del método Tyreus-Luyben para escoger los valores Kp, Ki y Kd del PID. Con el método de back-calculation para el filtro anti-windup se halla Kb con la ecuación K_b=√(K_i/K_d )  (Visioli, 2006). El valor N de la constante del filtro derivativo se puede hallar al probar diversos valores.<li>
+                        <li>Utilizar las ecuaciones del método Tyreus-Luyben para escoger los valores Kp, Ki y Kd del PID. Con el método de back-calculation para el filtro anti-windup se halla Kb con la ecuación K_b=√(K_i/K_d )  (Visioli, 2006). El valor N de la constante del filtro derivativo se puede hallar al probar diversos valores.</li>
                     </ol>
                     <br>
                     <img src="img/modelo pid.png" alt="Figura 2. Modelo en Simulink del PID y su planta" class="img-rounded">
-                    <p>Figura 2. Modelo en Simulink del PID y su planta</p>
+                    <p>Figura 9. Modelo en Simulink del PID y su planta</p>
                     <br>
                 </dd>
                 <dt>Código Arduino<dt>
@@ -97,13 +97,13 @@ By Daniela Simancas Mateus
                     <p>El PID diseñado se encuentra implementado en código en el archivo actuador.ino. El código está escrito en lenguaje Arduino, el cual es una forma simplificada de C, y se corre en el software Arduino IDE. Fue pensando para montarse en una tarjeta Arduino Mini. Si se cambia de tarjeta, recuerde verificar el número de los pines, como muestra la Figura 3. Por ejemplo, pinControl debe ser un pin con capacidad PWM.</p>
                     <br>
                     <img src="img/figura3.png" alt="Figura 3. Sección del código donde se especifican los pines" class="img-rounded">
-                    <p>Figura 3. Sección del código donde se especifican los pines</p>
+                    <p>Figura 10. Sección del código donde se especifican los pines</p>
                     <br>
                     
                     <p>Por otro lado, los parámetros del PID están definidos como variables globales. Por tanto, para editarlos basta con modificar el segmento presentado en la Figura 4. Para información acerca de qué valores son adecuados, dirigirse a la sección 4.1.1. De nuevo, se recomienda que sólo realicen cambios personas con experiencia en el tema.</p>
                     <br>
                     <img src="img/figura4.png" alt="Figura 4. Sección del código donde se especifican los valores del PID" class="img-rounded">
-                    <p>Figura 4. Sección del código donde se especifican los valores del PID</p>
+                    <p>Figura 11. Sección del código donde se especifican los valores del PID</p>
                     <br>
                 </dd>
             </dl>
@@ -145,10 +145,10 @@ By Daniela Simancas Mateus
                         </li>
                         <br>
                         <img src="img/figura5.png" alt="Figura 5. Ejemplo funciones de membresía para el error." class="img-rounded">
-                        <p>Figura 5. Ejemplo funciones de membresía para el error.</p>
+                        <p>Figura 12. Ejemplo funciones de membresía para el error.</p>
                         <br>
                         <img src="img/figura6.png" alt="Figura 6. Ejemplo funciones de membresía para la diferencia del error acumulado." class="img-rounded">
-                        <p>Figura 6. Ejemplo funciones de membresía para la diferencia del error acumulado.</p>
+                        <p>Figura 13. Ejemplo funciones de membresía para la diferencia del error acumulado.</p>
                         <br>
                         <li>Obtención de las funciones de membresía para la salida. 
                             <ol>
@@ -158,12 +158,12 @@ By Daniela Simancas Mateus
                         </li>
                         <br>
                         <img src="img/figura7.png" alt="Figura 7. Ejemplo funciones de membresía para el nivel de falla." class="img-rounded">
-                        <p>Figura 7. Ejemplo funciones de membresía para el nivel de falla.</p>
+                        <p>Figura 14. Ejemplo funciones de membresía para el nivel de falla.</p>
                         <br>
                         <li>Determinación de las reglas para el mapeo entre entradas y salidas. Con las entradas que se tienen para este sistema Fuzzy y los estados difusos mostrados en las figuras 3,4 y 5. Se recomienda hacer uso de la siguiente distribución:</li>
                         <br>
                         <img src="img/figura8.png" alt="Figura 8. Defuzzyficación para obtener el valor de referencia según el nivel de falla." class="img-rounded">
-                        <p>Figura 8. Defuzzyficación para obtener el valor de referencia según el nivel de falla.</p>
+                        <p>Figura 15. Defuzzyficación para obtener el valor de referencia según el nivel de falla.</p>
                         <br>
                         <li>Defuzzyficación para obtener el valor de referencia según el nivel de falla.</li>
                     </ol>
@@ -181,7 +181,8 @@ By Daniela Simancas Mateus
                 </dd>
                 <dt>Código Arduino o Intel Galileo</dt>
                 <dd>
-                    <p>El Fuzzy Logic con Fault Detection diseñado se encuentra implementado en código en el archivo PruebaSensores.ino. El código está escrito en lenguaje Arduino, el cual es una forma simplificada de C, y se corre en el software Arduino IDE. Fue pensando para montarse en una tarjeta Intel Galileo. Se debe tener en cuenta que para poder utilizar esta tarjeta con el software de Arduino debe dhñasdñsa. Si se cambia de tarjeta, recuerde verificar el número de los pines, de tal manera que se correspondiente con su salida.</p>
+                    <p>El Fuzzy Logic con Fault Detection diseñado se encuentra implementado en código en el archivo pruebaSensores.ino. El código está escrito en lenguaje Arduino, el cual es una forma simplificada de C, y se corre en el software Arduino IDE. Fue pensando para montarse en una tarjeta Intel Galileo.
+Se debe tener en cuenta que para poder utilizar esta tarjeta con el software de Arduino primero se deben seguir las instrucciones mostradas en (Butler, 2015) para instalar los drivers de la tarjeta y activar el puerto serial. Posteriormente seguir las instrucciones (Shawn, 2015) para poder programar desde el software Arduino IDE. Si se cambia de tarjeta, recuerde verificar el número de los pines, de tal manera que sea correspondiente con su salida.</p>
                 </dd>
             </dl>
           </div><!-- /.blog-post -->
@@ -199,7 +200,7 @@ By Daniela Simancas Mateus
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
           <div class="sidebar-module sidebar-module-inset">
             <h4>Acerca de la Wiki</h4>
-            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+            <p>En esta wiki encontrará información del desarrollo del proyecto SmartCylinder desarrollado en la Universidad de los Andes para el curso Taller de control.</p>
           </div>
           <div class="sidebar-module">
             <h4>Archivos</h4>

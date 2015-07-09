@@ -61,9 +61,12 @@ By Daniela Simancas Mateus
           <div class="blog-post">
             <h2 class="blog-post-title">Interfaz de visualización</h2>
             <hr>
-            <p>Para tener información accesible y en tiempo real del control de la planta, se propone desarrollar una interfaz gráfica que cuente con información de las fallas en cada sección de tubería y que informe el usuario la cantidad de agente limpiador disponible en cada robot. La interfaz se desarrollará usando Microsoft Visual Studio y se programará mediante código Visual Basic.Net. </p>
-            <p>En concreto, la interfaz cuenta con un esquema del modelo de la planta diseñada, la cual indicará la presencia de una falla mediante cambios de color en el segmento de la tubería detectado. Además, indica qué robot está en funcionamiento, qué cantidad de agente limpiador tiene cada uno, y qué robot requiere recarga del agente.</p>
-
+            <p>Para tener información accesible y en tiempo real del control de la planta, se propone desarrollar una interfaz gráfica que cuente con información de las fallas en cada sección de tubería y que informe el usuario la cantidad de agente limpiador disponible en cada robot. La interfaz se desarrollará usando Microsoft Visual Studio y se programará mediante código Visual Basic.Net.</p>
+			<h3>Diseño</h3>
+			<p>En concreto, la interfaz cuenta con led’s que indican qué robot está en funcionamiento, indicadores que muestran qué cantidad de agente limpiador tiene cada uno, y avisos que señalan de manera oportuna qué robot requiere recarga del agente. Además, se presenta un cambio de color en los segmentos de tubería que están siendo limpiados directamente por la acción de uno o más robots.</p>
+			<p>Para adquirir los datos, la interfaz hace uso de un puerto serial del computador el cual toma los datos que envía la tarjeta (Arduino o Galileo) a los robots. Finalmente se encuentra el botón de salir, que deshabilita el puerto serial y cierra la aplicación.</p>
+			<img src="img/Interfaz.png" width="75%" height="75%" alt="Figura 8. Defuzzyficación para obtener el valor de referencia según el nivel de falla." class="img-rounded">
+            <p>Figura 16. Interfaz para el monitoreo de la planta.</p>
           </div><!-- /.blog-post -->
           
           <div class="blog-post">
@@ -90,7 +93,7 @@ By Daniela Simancas Mateus
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
           <div class="sidebar-module sidebar-module-inset">
             <h4>Acerca de la Wiki</h4>
-            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+            <p>En esta wiki encontrará información del desarrollo del proyecto SmartCylinder desarrollado en la Universidad de los Andes para el curso Taller de control.</p>
           </div>
           <div class="sidebar-module">
             <h4>Archivos</h4>
